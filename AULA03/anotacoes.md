@@ -48,6 +48,7 @@ sudo nano pg_hba.conf
 >Para ir para o final do arquivo: Ctrl + End (pode ser necessário utilizar o fn também)
 
 4. Alterações realizadas:
+
 ![alt text](image.png)
 
 >`Porque o 0.0.0.0?` O número 0 é um número neutro, então permite que todos possam acessar.
