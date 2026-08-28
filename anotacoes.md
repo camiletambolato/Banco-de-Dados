@@ -81,3 +81,40 @@ pg_lsclusters
 ```sql
 5432 → Porta padrão
 ```
+
+```mermaid
+SELECT * FROM produtos;
+
+SELECT nome,preço FROM produtos;
+
+SELECT * FROM produtos WHERE estoque < 15;
+
+SELECT * FROM produtos
+ORDER BY preço DESC ou ASC;
+
+SELECT * FROM produtos WHERE nome='Lustre';
+
+UPDATE produtos
+SET preço=5000 WHERE nome='Lustre';
+
+DELETE FROM produtos
+WHERE nome='Torneira';
+
+DELETE FROM produtos WHERE id IN (1,2,3);
+```
+
+```mermaid
+DROP DATABASE nome
+
+DROP DATABASE IF EXITS nome
+```
+```mermaid 
+-- criação de tabela
+CREATE TABLE produtos(
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    categoria VARCHAR(50) NOT NULL,
+    preco DECIMAL(10,2) NOT NULL,
+    estoque INTEGER NOT NULL
+);
+```
