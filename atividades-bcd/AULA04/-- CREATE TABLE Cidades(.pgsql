@@ -5,7 +5,7 @@
 --     populaçao INT NOT NULL DEFAULT 0
 -- );
 
-SELECT * FROM Cidades;
+SELECT * FROM cidades;
 -- INSERT INTO Cidades (cidades,pais,populaçao)
 -- VALUES('Nova York','Estados Unidos','19293000'),
 -- ('Área da Baía de S. Francisco','Estados Unidos','7660000'),

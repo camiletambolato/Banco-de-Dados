@@ -118,3 +118,91 @@ CREATE TABLE produtos(
     estoque INTEGER NOT NULL
 );
 ```
+
+### Adicionando produtos em lista BCD (thunderclient)
+
+Produtos (pasta)
+|
+---conexao.php (file)
+|
+---produtos.php (file)
+
+**conexao.php**
+```php
+//conexao.php
+<?php
+
+$host = "192.168.10.81";
+$usuario = "postgres";
+$banco = "lojasenai";
+$senha = "Camile07122009";
+
+$pdo = new PDO(
+    "pgsql:host=$host;port=5432;dbname=$banco",
+    $usuario,
+    $senha
+);
+```
+**produtos.php**
+```php
+//produtos.php
+<?php
+
+header("Content-Type: application/json");
+
+require "conexao.php";
+
+$metodo = $_SERVER["REQUEST_METHOD"];
+
+if($metodo == "POST"){
+    $json = file_get_contents("php://input");
+
+    $dados = json_decode($json,true);
+
+    $sql = "INSERT INTO produtos (nome,preco) VALUES (?,?)";
+
+    $comando = $pdo -> prepare($sql);
+
+    $comando -> execute([
+        $dados["nome"],
+        $dados["preco"]
+    ]);
+
+    echo json_encode([
+        "Mensagem"=>"Produto cadastrado com sucesso! 😊"
+    ]);
+}
+
+if($metodo == "GET"){
+    $sql = "SELECT * FROM produtos ORDER BY id";
+
+    $comando = $pdo -> query($sql);
+
+    $produtos = $comando -> fetchAll(PDO::FETCH_ASSOC);
+
+    echo json_encode($produtos);
+}
+```
+
+**No terminal**
+php -S localhost:8000
+╰› rodar o servidor 
+
+**Rodando**
+![alt text](image-1.png)
+╰› adicionar produtos.php no final
+
+**No postgres**
+CREATE TABLE produtos(
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    preco NUMERIC(10,2) NOT NULL
+);
+
+**No thunderclient**
+![alt text](image.png)
+
+**New Query**
+╰› SELECT * FROM produtos;
+
+---
