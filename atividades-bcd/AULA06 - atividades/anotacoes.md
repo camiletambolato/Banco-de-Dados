@@ -298,3 +298,69 @@ INSERT INTO livros (titulo, autor, preco, genero, estoque, ano_publicacao) VALUE
 
 SELECT * FROM livros;
 ```
+
+
+### Comandos
+
+```pgsql
+-- 1. Exibir todos os dados, limitando aos 10 primeiros registros
+SELECT * FROM livros 
+LIMIT 10;
+
+-- 2. Exibir apenas as colunas nome (titulo), autor e preco
+SELECT titulo AS titulo, autor, preco 
+FROM livros;
+
+-- 3. Listar os gêneros distintos em ordem alfabética
+SELECT DISTINCT genero 
+FROM livros 
+ORDER BY genero ASC;
+
+-- 4. Contar quantos autores diferentes existem
+SELECT COUNT(DISTINCT autor) AS total_autores 
+FROM livros;
+
+-- 5. Listar os 5 livros mais caros
+SELECT titulo AS titulo, preco 
+FROM livros 
+ORDER BY preco DESC 
+LIMIT 5;
+
+-- 6. Listar os 5 livros com menor estoque
+SELECT titulo AS titulo, estoque 
+FROM livros 
+ORDER BY estoque ASC 
+LIMIT 5;
+
+-- 7. Mostrar titulo e estoque dos livros do gênero Técnico
+SELECT titulo AS titulo, estoque 
+FROM livros 
+WHERE genero = 'Técnico';
+
+-- 8. Mostrar titulo e preco dos livros que custam mais de R$ 200,00
+SELECT titulo AS titulo, preco 
+FROM livros 
+WHERE preco > 200.00;
+
+-- 9. Mostrar titulo e preco dos livros com preço entre R$ 40,00 e R$ 70,00
+SELECT titulo AS titulo, preco 
+FROM livros 
+WHERE preco BETWEEN 40.00 AND 70.00;
+
+-- 10. Mostrar os livros com estoque abaixo de 5 unidades
+SELECT * 
+FROM livros 
+WHERE estoque < 5;
+
+-- 11. Listar os livros publicados antes de 1900, do mais antigo para o mais recente
+SELECT * 
+FROM livros 
+WHERE ano_publicacao < 1900 
+ORDER BY ano_publicacao ASC;
+
+-- 12. Listar livros publicados entre 2010 e 2020 (título, ano e gênero)
+SELECT titulo AS titulo, ano_publicacao, genero 
+FROM livros 
+WHERE ano_publicacao BETWEEN 2010 AND 2020;
+
+```
